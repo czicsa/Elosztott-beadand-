@@ -26,6 +26,7 @@ public class CarController {
     @RequestMapping(value = "/newcar")
     public ModelAndView addNewCar() {
         ModelAndView mav = new ModelAndView("newcar");
+        mav.addObject("car", new Car());
         return mav;
     }
 
@@ -47,85 +48,4 @@ public class CarController {
         repo.editCar(car);
         return "redirect:/list";
     }
-
-
-
-	/*@RequestMapping(value = "/get-balance")
-	public ModelAndView generateBalancePage() {
-		ModelAndView mav = new ModelAndView("balance");
-
-		return mav;
-	}
-
-	@RequestMapping(value = "/newuser", method = { RequestMethod.GET })
-	public ModelAndView generateNewUserPage() {
-		ModelAndView mav = new ModelAndView("newuser");
-		UserModelData data = new UserModelData();
-		data.setUsername("");
-		data.setCredit("");
-		data.getSchool().add("HIGHSCHOOL");
-		mav.addObject("pageData", data);
-		mav.addObject("schools", availableSchools);
-		mav.addObject("colors", availableColors);
-		mav.addObject("genders", availableGenders);
-		return mav;
-	}
-
-	@RequestMapping(value = "/newuser", method = { RequestMethod.POST })
-	public ModelAndView generateCreateUserHandler(@ModelAttribute() @Valid CreateUserDTO dto, BindingResult result) {
-
-		ModelAndView mav = new ModelAndView("newuser");
-		System.out.println(dto);
-		List<String> errors = new ArrayList<String>();
-		if (result.hasErrors()) {
-			manageErrors(errors, availableFields, result);
-
-			UserModelData data = new UserModelData();
-			data.setUsername(dto.getUsername());
-			data.setCredit(dto.getCredit());
-			if (dto.getSchool() != null) {
-				data.getSchool().add(dto.getSchool().name());
-			}
-
-			if (dto.getFavcol() != null) {
-				data.setFavcol(dto.getFavcol());
-			}
-
-			if (dto.getGend() != null) {
-				data.setGend(dto.getGend().name());
-			}
-
-			mav.addObject("pageData", data);
-			mav.addObject("schools", availableSchools);
-			mav.addObject("colors", availableColors);
-			mav.addObject("genders", availableGenders);
-			mav.addObject("status", errors);
-			return mav;
-		}
-
-		userManager.storeUser(dto);
-
-		mav.setViewName("redirect:/admin/status");
-		return mav;
-	}
-
-	private UserModelData generateDefaultModelData() {
-		UserModelData data = new UserModelData();
-		data.setUsername("");
-		data.setCredit("");
-		data.getSchool().add("HIGHSCHOOL");
-
-		return data;
-	}
-
-	private void manageErrors(List<String> result, String[] fields, BindingResult validationResult) {
-		int length = fields.length;
-		List<FieldError> fieldErrors = null;
-		for (int i = 0; i < length; i++) {
-			fieldErrors = validationResult.getFieldErrors(fields[i]);
-			for (FieldError fe : fieldErrors) {
-				result.add(fields[i] + ": " + fe.getDefaultMessage());
-			}
-		}
-	}*/
 }

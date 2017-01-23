@@ -11,6 +11,8 @@ public class Car {
     private int id;
     private String type;
     private int numberOfWheels;
+    private boolean isNew;
+    private String vehicleType;
 
     public int getId() {
         return id;
@@ -34,5 +36,21 @@ public class Car {
 
     public void setNumberOfWheels(int numberOfWheels) {
         this.numberOfWheels = numberOfWheels;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 }

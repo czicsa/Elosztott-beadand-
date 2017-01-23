@@ -12,7 +12,7 @@
 <div>
 	<ul>
 		<c:forEach items="${cars}" var="car">
-			<li>${car.type} - ${car.numberOfWheels} db kerék - <a href="modifycar?carid=${car.id}">Szerkesztés</a></li>
+			<li>${car.type} - <c:if test="${car['new']}">Új</c:if><c:if test="${!car['new']}">Régi</c:if> - ${car.numberOfWheels} db kerék - <c:if test="${car.vehicleType == 'car'}">Autó</c:if><c:if test="${car.vehicleType == 'truck'}">Kamion</c:if> - <a href="modifycar?carid=${car.id}">Szerkesztés</a></li>
 		</c:forEach>
 	</ul>
 </div>
