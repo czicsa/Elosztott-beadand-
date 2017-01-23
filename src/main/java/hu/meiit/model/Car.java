@@ -1,5 +1,11 @@
 package hu.meiit.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +15,19 @@ import java.util.List;
 public class Car {
 
     private int id;
+
+    @NotNull
+    @Size(min = 2, max = 10)
     private String type;
+
+    @NotNull
+    @Min(1)
+    @Max(8)
     private int numberOfWheels;
+
     private boolean isNew;
+
+    @NotBlank
     private String vehicleType;
 
     public int getId() {
