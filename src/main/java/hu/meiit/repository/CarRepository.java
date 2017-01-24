@@ -18,7 +18,7 @@ public class CarRepository {
         car.setId(counter++);
         car.setType("Renault");
         car.setNumberOfWheels(4);
-        car.setNew(false);
+        car.setIsNew(false);
         car.setVehicleType("car");
         cars.add(car);
     }
@@ -38,7 +38,8 @@ public class CarRepository {
                 result.setId(car.getId());
                 result.setType(car.getType());
                 result.setNumberOfWheels(car.getNumberOfWheels());
-                result.setNew(car.isNew());
+                result.setIsNew(car.getIsNew());
+                result.setVehicleType(car.getVehicleType());
                 return result;
             }
         }
@@ -50,7 +51,7 @@ public class CarRepository {
             if(car.getId() == editedCar.getId()){
                 car.setType(editedCar.getType());
                 car.setNumberOfWheels(editedCar.getNumberOfWheels());
-                car.setNew(editedCar.isNew());
+                car.setIsNew(editedCar.getIsNew());
                 car.setVehicleType(editedCar.getVehicleType());
             }
         }

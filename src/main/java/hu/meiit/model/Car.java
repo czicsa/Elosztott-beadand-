@@ -1,5 +1,6 @@
 package hu.meiit.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Max;
@@ -25,6 +26,7 @@ public class Car {
     @Max(8)
     private int numberOfWheels;
 
+    @JsonProperty
     private boolean isNew;
 
     @NotBlank
@@ -54,11 +56,11 @@ public class Car {
         this.numberOfWheels = numberOfWheels;
     }
 
-    public boolean isNew() {
+    public boolean getIsNew() {
         return isNew;
     }
 
-    public void setNew(boolean aNew) {
+    public void setIsNew(boolean aNew) {
         isNew = aNew;
     }
 

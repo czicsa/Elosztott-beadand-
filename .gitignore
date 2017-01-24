@@ -25,3 +25,6 @@
 .idea/uiDesigner.xml
 .idea/vcs.xml
 .idea/workspace.xml
+.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_6_7.xml
+.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_6_7.xml
+.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_6_3.xml

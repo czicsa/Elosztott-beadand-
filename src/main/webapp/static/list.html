@@ -1,0 +1,18 @@
+<html>
+<head>
+	<title>Autók</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<script src="/static/js/app.js"></script>
+	<script src="/static/js/listCtrl.js"></script>
+</head>
+<body data-ng-app="carApp" data-ng-controller="listCtrl">
+<h1>Autók</h1>
+<span data-ng-click="newCar()">Új autó felvétele</span>
+<div>
+	<ul>
+		<li data-ng-repeat="car in cars">{{car.type}} - <span data-ng-if="car.isNew">Új</span><span data-ng-if="!car.isNew">Régi</span> - {{car.numberOfWheels}} db kerék - <span data-ng-if="car.vehicleType == 'car'">Autó</span><span data-ng-if="car.vehicleType == 'truck'">Kamion</span> - <span data-ng-click="modifyCar(car)">Szerkesztés</span></li>
+
+	</ul>
+</div>
+</body>
+</html>

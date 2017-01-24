@@ -1,0 +1,21 @@
+
+<html>
+<head>
+    <title>Új autó felvétele</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/newCtrl.js"></script>
+</head>
+<body data-ng-app="carApp" data-ng-controller="newCtrl">
+    <h1>Új autó felvétele</h1>
+    <label for="type">Típus</label>
+    <input id="type" type="text" placeholder="Típus" name="type" data-ng-model="car.type"/> <br />
+    <label for="numberOfWheels">Kerekek száma</label>
+    <input id="numberOfWheels" type="number" placeholder="Kerekek száma" name="numberOfWheels" data-ng-model="car.numberOfWheels"/> <br />
+    <label for="isNew"><input id="isNew" type="checkbox" name="isNew" data-ng-model="car.isNew"/>Új</label> <br />
+    <label for="vehicleType1"><input id="vehicleType1" type="radio" name="vehicleType" value="car" data-ng-model="car.vehicleType"/>Autó</label><br />
+    <label for="vehicleType2"><input id="vehicleType2" type="radio" name="vehicleType" value="truck" data-ng-model="car.vehicleType"/>Kamion</label><br />
+
+    <button data-ng-click="save()">Mentés</button>
+</body>
+</html>

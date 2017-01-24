@@ -5,13 +5,11 @@ import hu.meiit.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class CarController {
@@ -20,10 +18,15 @@ public class CarController {
 	private CarRepository repo;
 
     @RequestMapping(value = "/list")
-    public ModelAndView getCarList() {
+    public ModelAndView getCarListPage() {
         ModelAndView mav = new ModelAndView("list");
-        mav.addObject("cars", repo.getCars());
         return mav;
+    }
+
+    @RequestMapping(value = "/getCars", produces = "application/json")
+    @ResponseBody
+    public List<Car> getCars() {
+        return repo.getCars();
     }
 
     @RequestMapping(value = "/newcar", method = RequestMethod.GET)
@@ -34,27 +37,24 @@ public class CarController {
     }
 
     @RequestMapping(value = "/newcar", method = RequestMethod.POST)
-    public String insertCar(@ModelAttribute("car") @Valid Car car, BindingResult errors) {
-        if(errors.hasErrors()){
-            return "redirect:/newcar";
-        }
+    public void insertCar(@RequestBody Car car) {
         repo.addCar(car);
-        return "redirect:/list";
     }
 
     @RequestMapping(value = "/modifycar", method = RequestMethod.GET)
-    public ModelAndView modifyCar(@RequestParam(value = "carid") int carId) {
+    public ModelAndView modifyCarPage() {
         ModelAndView mav = new ModelAndView("modifycar");
-        mav.addObject("car", repo.getCarById(carId));
         return mav;
     }
 
+    @RequestMapping(value = "/getCarById/{carId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Car getCarById(@PathVariable int carId) {
+        return repo.getCarById(carId);
+    }
+
     @RequestMapping(value = "/modifycar", method = RequestMethod.POST)
-    public String modifyCar(@ModelAttribute("car") @Valid Car car, BindingResult errors) {
-        if(errors.hasErrors()){
-            return "redirect:/modifycar?carid=" + car.getId();
-        }
+    public void modifyCar(@RequestBody Car car) {
         repo.editCar(car);
-        return "redirect:/list";
     }
 }
