@@ -1,6 +1,6 @@
-app.controller("listCtrl", function($scope, $http, $window) {
+app.controller("listCtrl",['$scope', '$http', '$window', 'api', function($scope, $http, $window, api) {
     var init = function () {
-        $http.get('getCars').then(
+        api.getCars().then(
             // successful
             function(response) {
                 $scope.cars = response.data;
@@ -8,7 +8,7 @@ app.controller("listCtrl", function($scope, $http, $window) {
             // unsuccessful
             function(response) {
                 alert("Hiba történt!");
-            });
+            });;
     };
 
     $scope.newCar = function () {
@@ -20,4 +20,4 @@ app.controller("listCtrl", function($scope, $http, $window) {
     };
 
     init();
-});
+}]);

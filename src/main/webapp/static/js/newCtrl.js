@@ -1,4 +1,4 @@
-app.controller("newCtrl", function($scope, $http, $window) {
+app.controller("newCtrl", ['$scope', '$http', '$window', '$mdToast', '$timeout', 'api', function($scope, $http, $window, $mdToast, $timeout, api) {
     var init = function () {
 
     };
@@ -11,15 +11,24 @@ app.controller("newCtrl", function($scope, $http, $window) {
     };
     
     $scope.save = function () {
-        $http.post('newcar', $scope.car).then(
+        api.newCar($scope.car).then(
             // successful
             function() {
-                $window.location.href = "/list";
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Sikeres mentés!')
+                        .hideDelay(1000)
+                );
+                $timeout(function() { $window.location.href = "/list";}, 1000);
             },
             // unsuccessful
             function() {
-                alert("Hiba történt!");
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Hiba történt!')
+                        .hideDelay(1000)
+                );
             });
     }
     init();
-});
+}]);

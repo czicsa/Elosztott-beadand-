@@ -1,18 +1,40 @@
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>Autók</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+	<!-- Angular Material Library -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+	<!-- Angular Material style sheet -->
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
 	<script src="/static/js/app.js"></script>
 	<script src="/static/js/listCtrl.js"></script>
 </head>
 <body data-ng-app="carApp" data-ng-controller="listCtrl">
 <h1>Autók</h1>
-<span data-ng-click="newCar()">Új autó felvétele</span>
+<md-button data-ng-click="newCar()">Új autó felvétele</md-button>
 <div>
-	<ul>
-		<li data-ng-repeat="car in cars">{{car.type}} - <span data-ng-if="car.isNew">Új</span><span data-ng-if="!car.isNew">Régi</span> - {{car.numberOfWheels}} db kerék - <span data-ng-if="car.vehicleType == 'car'">Autó</span><span data-ng-if="car.vehicleType == 'truck'">Kamion</span> - <span data-ng-click="modifyCar(car)">Szerkesztés</span></li>
-
-	</ul>
+	<md-content class="md-padding" layout-xs="column" layout="row">
+		<div flex-xs flex-gt-xs="50" layout="column">
+			<md-card data-ng-repeat="car in cars">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{car.type}}</span>
+						<span class="md-subhead"><span data-ng-if="car.isNew">Új</span><span data-ng-if="!car.isNew">Régi</span> - {{car.numberOfWheels}} db kerék - <span data-ng-if="car.vehicleType == 'car'">Autó</span><span data-ng-if="car.vehicleType == 'truck'">Kamion</span></span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-actions layout="row" layout-align="end center">
+					<md-button data-ng-click="modifyCar(car)">Szerkesztés</md-button>
+				</md-card-actions>
+			</md-card>
+		</div>
+	</md-content>
 </div>
 </body>
 </html>

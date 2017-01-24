@@ -1,7 +1,7 @@
-app.controller("modifyCtrl", function($scope, $http, $window, $location) {
+app.controller("modifyCtrl", ['$scope', '$http', '$window', '$location', '$mdToast', '$timeout', 'api', function($scope, $http, $window, $location, $mdToast, $timeout, api) {
     var init = function () {
         var params = $location.search();
-        $http.get('getCarById/' + params.carId ).then(
+        api.getCarById(params.carId).then(
             // successful
             function(response) {
                 $scope.car = response.data;
@@ -13,15 +13,24 @@ app.controller("modifyCtrl", function($scope, $http, $window, $location) {
     };
 
     $scope.save = function () {
-        $http.post('modifycar', $scope.car).then(
+        api.modifyCar($scope.car).then(
             // successful
             function() {
-                $window.location.href = "/list";
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Sikeres mentés!')
+                        .hideDelay(1000)
+                );
+                $timeout(function() { $window.location.href = "/list";}, 1000);
             },
             // unsuccessful
             function() {
-                alert("Hiba történt!");
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Hiba történt!')
+                        .hideDelay(1000)
+                );
             });
     };
     init();
-});
+}]);
