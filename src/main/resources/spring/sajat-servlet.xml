@@ -21,8 +21,6 @@
         </property>
     </bean>
 
-    <bean id="userManager" class="hu.meiit.repository.CarRepository"></bean>
-
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages" />
     </bean>

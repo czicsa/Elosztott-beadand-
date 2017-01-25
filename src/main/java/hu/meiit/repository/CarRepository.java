@@ -1,6 +1,7 @@
 package hu.meiit.repository;
 
 import hu.meiit.model.Car;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * Created by Czinke Csaba on 2017.01.15..
  */
+@Component
 public class CarRepository {
     private int counter;
     private List<Car> cars;
