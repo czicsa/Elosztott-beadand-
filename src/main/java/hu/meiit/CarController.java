@@ -1,6 +1,9 @@
 package hu.meiit;
 
+import hu.meiit.integration.ExecutionReport;
+import hu.meiit.integration.SendEmailService;
 import hu.meiit.model.Car;
+import hu.meiit.model.EmailDetails;
 import hu.meiit.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,9 @@ public class CarController {
 
 	@Autowired
 	private CarRepository repo;
+
+    @Autowired
+    private SendEmailService emailService;
 
     @RequestMapping(value = "/list")
     public ModelAndView getCarListPage() {
@@ -37,6 +43,8 @@ public class CarController {
     @RequestMapping(value = "/newcar", method = RequestMethod.POST)
     public void insertCar(@RequestBody Car car) {
         repo.addCar(car);
+        ExecutionReport report = emailService.sendEmail(new EmailDetails("Új autó"));
+
     }
 
     @RequestMapping(value = "/modifycar", method = RequestMethod.GET)
