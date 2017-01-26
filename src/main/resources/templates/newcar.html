@@ -17,25 +17,44 @@
 </head>
 <body data-ng-app="carApp" data-ng-controller="newCtrl">
     <h1>Új autó felvétele</h1>
-    <md-input-container>
-        <label>Típus</label>
-        <input data-ng-model="car.type">
-    </md-input-container><br />
-    <md-input-container>
-        <label>Kerekek száma</label>
-        <input type="number" data-ng-model="car.numberOfWheels">
-    </md-input-container><br />
-    <md-checkbox data-ng-model="car.isNew" aria-label="Új">
-        Új
-    </md-checkbox><br />
+    <form name="newCarForm">
+        <md-input-container>
+            <label>Típus</label>
+            <input name="type" data-ng-model="car.type"
+                   required
+                   data-ng-minlength="5"
+                   data-ng-maxlength="20">
+            <div data-ng-messages="newCarForm.type.$error">
+                <div data-ng-message="required">Kötelező mező!</div>
+                <div data-ng-message="minlength">Legalább 5 karakter!</div>
+                <div data-ng-message="maxlength">Legfeljebb 20 karakter!</div>
+            </div>
+        </md-input-container><br />
 
-    <md-radio-group data-ng-model="car.vehicleType">
+        <md-input-container>
+            <label>Kerekek száma</label>
+            <input name="numberOfWheels" type="number" data-ng-model="car.numberOfWheels"
+                   required
+                   data-ng-min="3"
+                   data-ng-max="6">
+            <div data-ng-messages="newCarForm.numberOfWheels.$error">
+                <div data-ng-message="required">Kötelező mező!</div>
+                <div data-ng-message="min">Legalább 3 kerék!</div>
+                <div data-ng-message="max">Legfeljebb 6 kerék!</div>
+            </div>
+        </md-input-container><br />
+        <md-checkbox data-ng-model="car.isNew" aria-label="Új">
+            Új
+        </md-checkbox><br />
 
-        <md-radio-button value="car">Autó</md-radio-button>
-        <md-radio-button value="truck">Kamion</md-radio-button>
+        <md-radio-group name="vehicleType" data-ng-model="car.vehicleType" required>
 
-    </md-radio-group>
+            <md-radio-button value="car">Autó</md-radio-button>
+            <md-radio-button value="truck">Kamion</md-radio-button>
 
-    <md-button data-ng-click="save()">Mentés</md-button>
+        </md-radio-group>
+
+        <md-button ng-disabled="newCarForm.$invalid" data-ng-click="save()">Mentés</md-button>
+    </form>
 </body>
 </html>

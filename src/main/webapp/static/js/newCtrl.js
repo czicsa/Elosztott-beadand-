@@ -22,10 +22,10 @@ app.controller("newCtrl", ['$scope', '$http', '$window', '$mdToast', '$timeout',
                 $timeout(function() { $window.location.href = "/list";}, 1000);
             },
             // unsuccessful
-            function() {
+            function(response) {
                 $mdToast.show(
                     $mdToast.simple()
-                        .textContent('Hiba történt!')
+                        .textContent(response.status == 400 ? 'Validációs hiba történt!' : 'Hiba történt!')
                         .hideDelay(1000)
                 );
             });

@@ -1,4 +1,4 @@
-var app = angular.module("carApp", ['ngMaterial'], function($locationProvider) {
+var app = angular.module("carApp", ['ngMaterial', 'ngMessages'], function($locationProvider) {
     $locationProvider.html5Mode({
         enabled: true,
         requireBase: false

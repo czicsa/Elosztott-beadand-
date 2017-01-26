@@ -6,6 +6,8 @@ import hu.meiit.model.Car;
 import hu.meiit.model.EmailDetails;
 import hu.meiit.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,9 +43,14 @@ public class CarController {
     }
 
     @RequestMapping(value = "/newcar", method = RequestMethod.POST)
-    public void insertCar(@RequestBody Car car) {
+    public ResponseEntity insertCar(@RequestBody Car car) {
+        if(!repo.isCarValid(car)){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         repo.addCar(car);
-        ExecutionReport report = emailService.sendEmail(new EmailDetails("Új autó"));
+        //ExecutionReport report = emailService.sendEmail(new EmailDetails("Új autó"));
+
+        return new ResponseEntity(HttpStatus.OK);
 
     }
 
@@ -60,7 +67,11 @@ public class CarController {
     }
 
     @RequestMapping(value = "/modifycar", method = RequestMethod.POST)
-    public void modifyCar(@RequestBody Car car) {
+    public ResponseEntity modifyCar(@RequestBody Car car) {
+        if(!repo.isCarValid(car)){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         repo.editCar(car);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

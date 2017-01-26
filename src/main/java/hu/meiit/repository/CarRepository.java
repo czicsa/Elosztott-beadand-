@@ -63,4 +63,20 @@ public class CarRepository {
         car.setId(counter++);
         cars.add(car);
     }
+
+    public boolean isCarValid(Car car){
+        if(car.getType() == null || car.getType().length() < 5 || car.getType().length() > 20){
+            return false;
+        }
+
+        if(car.getNumberOfWheels() < 3 || car.getNumberOfWheels() > 6){
+            return false;
+        }
+
+        if(car.getVehicleType() == null || car.getVehicleType().length() == 0) {
+            return false;
+        }
+
+        return true;
+    }
 }
